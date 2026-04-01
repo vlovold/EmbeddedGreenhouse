@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Sensor:</h1>
+  <p id="val">Loading...</p>
+
+  <script>
+    async function getData() {
+      const res = await fetch('/data');
+      const data = await res.json();
+      document.getElementById("val").innerText = data.sensor;
+    }
+
+    setInterval(getData, 1000);
+  </script>
+</body>
+</html>
