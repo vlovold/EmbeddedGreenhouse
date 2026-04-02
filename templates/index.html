@@ -5,20 +5,41 @@
   <meta name="viewport" content="with=device_width, initial-scale=1.0">
   <title>Greenhouse</title>
   <link rel="stylesheet" href="static/styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+  </style>
 </head>
+
 <body>
-  <h1>Sensor:</h1>
-  <div>
-    <button>Click</button>
-    <a href="https://www.youtube.com/watch?v=vY2xUc4TVmY">Her lærte jeg HTML</a>
-    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExajJncmxtZGJ6d3lmenpvbTgxZ3U2ZjA5aDN6c3Uwemg0dWwwdmZpMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WVUQ1zyiSJ4ly/giphy.gif">
-    <form>
-      <label for="search">Search</label>
-      <input type="text" name="search" id="search">
-      <button type="submit">Search</button>
-    </form>
+  <div class="title">
+    <h1>Online Greenhouse</h1>
+  </div>
+
+  <div class="subtitle-cont">
+    <div>
+      <h2>Live Sensor Data</h2>
+
+    </div>
+    <div>
+      <h2>Control Panel</h2>
+    </div>
+  </div>
+
+  <div class="data">
+
+    <p>Temp: <span id="temp"></span></p>
   </div>
 
 
+  <script>
+    async function update() {
+    const res = await fetch('/data');
+    const data = await res.json();
+
+    document.getElementById("temp").innerText = data.temp;
+    }
+
+    setInterval(update, 1000);
+  </script>
 </body>
 </html>

@@ -1,8 +1,29 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+body {
+    font-family: 'Lato'
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
 
-* {
-    color: green;
-    font-family: 'Saira'
+.title {
+    background-color: #d6ffe2;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+}
+.subtitle-cont{
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 35rem;
 }
