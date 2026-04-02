@@ -27,3 +27,17 @@ body {
     align-items: flex-start;
     gap: 35rem;
 }
+
+.data_display{
+    display: flex;
+    flex-direction: column;
+    background-color: #deebff;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 40vh;
+    text-align: center;
+    transform: translateX(25vh);
+}
+#temp, #soil, #air, #brightness, #fanspeed {
+    font-weight: bold;
+}

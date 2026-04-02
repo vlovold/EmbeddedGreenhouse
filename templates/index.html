@@ -25,9 +25,12 @@
     </div>
   </div>
 
-  <div class="data">
-
-    <p>Temp: <span id="temp"></span></p>
+  <div class="data_display">
+    <p>Temperature: <span id="temp" ></span></p>
+    <p>Soil Humidity: <span id="soil"></span></p>
+    <p>Air Humidity: <span id="air"></span></p>
+    <p>Brightness: <span id="brightness"></span></p>
+    <p>Fan Speed: <span id="fanspeed"></span></p>
   </div>
 
 
@@ -37,6 +40,10 @@
     const data = await res.json();
 
     document.getElementById("temp").innerText = data.temp;
+    document.getElementById("soil").innerText = data.soil;
+    document.getElementById("air").innerText = data.air;
+    document.getElementById("brightness").innerText = data.brightness;
+    document.getElementById("fanspeed").innerText = data.fanspeed;
     }
 
     setInterval(update, 1000);
