@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from data import, uart_read, get_data,uart_init
+from data import uart_read, get_data,uart_init
 
 ser = uart_init()
 app = Flask(__name__)
