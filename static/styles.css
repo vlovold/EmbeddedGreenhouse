@@ -1,43 +1,78 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
+:root {
+  color-scheme: light dark;
+}
 body {
     font-family: 'Lato'
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: Canvas;
+    color: CanvasText;
 }
 
 .title {
-    background-color: #d6ffe2;
-    height: 10vh;
+    background-color: Field;
+    color: FieldText;
+    height: 5vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    border: 2px solid #333;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
+    align-items: center;
+    border: 2px solid FieldText;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 40px;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
 }
+
 .subtitle-cont{
     display: flex;
     height: 10vh;
     justify-content: center;
     align-items: flex-start;
-    gap: 35rem;
+    gap: 5vh;
+}
+
+.sensor{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1vh;
 }
 
 .data_display{
     display: flex;
     flex-direction: column;
-    background-color: #deebff;
+    background-color: transparent;
     border: 2px solid #333;
     border-radius: 10px;
     width: 40vh;
     text-align: center;
-    transform: translateX(25vh);
 }
-#temp, #air, #brightness {
+
+.control{
+    display: flex;
+    Flex-direction: column;
+    text-align: center;
+    gap: 1vh;
+}
+
+.control_display {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 100vh;
+    text-align: center;
+}
+input[type="range"] {
+    display: flex;
+    width: 20vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#temp, #air, #brightness, #moisture, #fan {
     font-weight: bold;
 }

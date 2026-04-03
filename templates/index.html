@@ -16,22 +16,30 @@
   </div>
 
   <div class="subtitle-cont">
-    <div>
+    <div class="sensor">
       <h2>Live Sensor Data</h2>
-
+      <div class="data_display">
+        <p>Temperature: <span id="temp" ></span></p>
+        <p>Soil Humidity: <span id="moisture"></span></p>
+        <p>Air  Humidity: <span id="air"></span></p>
+        <p>Brightness: <span id="brightness"></span></p>
+        <p>Fan Speed: <span id="fan"></span></p>
+      </div>
+      Last data recieved: 2026-04-02-16:20:42
+      <img class="gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExenhxOWEzeTU4Y2hvdGQwNnhieDN4NnRtMz
+      M4ZG55dWszYTZ4MzlkcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/AXpnFlC5T2lIRezPUC/giphy.gif" width="300" height="300">
     </div>
-    <div>
+    <div class="control">
       <h2>Control Panel</h2>
+      <div class="control_display">
+        <h3>Water Pump:</h3>
+        <input type="range" id="pump" min="0" max="100" value="0">
+
+      </div>
+
     </div>
   </div>
 
-  <div class="data_display">
-    <p>Temperature: <span id="temp" ></span></p>
-    <p>Soil Humidity: 60%></p>
-    <p>Air Humidity: <span id="air"></span></p>
-    <p>Brightness: <span id="brightness"></span></p>
-    <p>Fan Speed: 400RPM</p>
-  </div>
 
 
   <script>
@@ -42,6 +50,8 @@
     document.getElementById("temp").innerText = data.TEMP;
     document.getElementById("air").innerText = data.HUM;
     document.getElementById("brightness").innerText = data.BRIGHT;
+    document.getElementById("moisture").innerText = data.SOIL;
+    document.getElementById("fan").innerText = data.FAN;
     }
 
     setInterval(update, 1000);
