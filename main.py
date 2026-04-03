@@ -3,6 +3,7 @@ from data import uart_read, get_data,uart_init
 
 ser = uart_init()
 app = Flask(__name__)
+app.run(host="0.0.0.0", port=5000)
 @app.route("/")
 def index():
     return render_template("index.html")
