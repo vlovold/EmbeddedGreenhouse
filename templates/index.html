@@ -27,10 +27,10 @@
 
   <div class="data_display">
     <p>Temperature: <span id="temp" ></span></p>
-    <p>Soil Humidity: <span id="soil"></span></p>
+    <p>Soil Humidity: 60%></p>
     <p>Air Humidity: <span id="air"></span></p>
     <p>Brightness: <span id="brightness"></span></p>
-    <p>Fan Speed: <span id="fanspeed"></span></p>
+    <p>Fan Speed: 400RPM</p>
   </div>
 
 
@@ -39,11 +39,9 @@
     const res = await fetch('/data');
     const data = await res.json();
 
-    document.getElementById("temp").innerText = data.temp;
-    document.getElementById("soil").innerText = data.soil;
-    document.getElementById("air").innerText = data.air;
-    document.getElementById("brightness").innerText = data.brightness;
-    document.getElementById("fanspeed").innerText = data.fanspeed;
+    document.getElementById("temp").innerText = data.TEMP;
+    document.getElementById("air").innerText = data.HUM;
+    document.getElementById("brightness").innerText = data.BRIGHT;
     }
 
     setInterval(update, 1000);

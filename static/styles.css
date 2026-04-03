@@ -38,6 +38,6 @@ body {
     text-align: center;
     transform: translateX(25vh);
 }
-#temp, #soil, #air, #brightness, #fanspeed {
+#temp, #air, #brightness {
     font-weight: bold;
 }
