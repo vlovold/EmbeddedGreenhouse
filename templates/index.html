@@ -32,13 +32,43 @@
     <div class="control">
       <h2>Control Panel</h2>
       <div class="control_display">
-        <h3>Water Pump:</h3>
-        <input type="range" id="pump" min="0" max="100" value="0">
+        <div class="pumpDiv">
+          <h3>Water Pump:</h3>
+          <div class="pumpSlider">
+           <input type="range" id="pump" min="0" max="100" value="0">
+          </div>
+        <p>Pump speed: <span id="pumpValue">0</span></p>
+        </div>
+
 
       </div>
 
     </div>
   </div>
+
+  <script>
+    const slider = document.getElementById("pump");
+    const output = document.getElementById("pumpValue");
+
+    slider.oninput = function() {
+      output.innerText = this.value;
+  }
+  </script>
+
+  <script>
+    async function sendValue(value) {
+      await fetch('/set', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ pump : value })
+        });
+    }
+
+    slider.oninput = function() {
+      output.innerText = this.value;
+      sendValue(this.value);
+}
+</script>
 
 
 

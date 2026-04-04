@@ -44,7 +44,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: transparent;
-    border: 2px solid #333;
+    border: 2px outset ButtonBorder;
     border-radius: 10px;
     width: 40vh;
     text-align: center;
@@ -55,22 +55,39 @@ body {
     Flex-direction: column;
     text-align: center;
     gap: 1vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .control_display {
     display: flex;
     flex-direction: column;
     background-color: transparent;
-    border: 2px solid #333;
+    border: 2px outset ButtonBorder;
     border-radius: 5px;
     width: 100vh;
     text-align: center;
+    justify-content: center;
+}
+
+.pumpDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: Field;
+    color: FieldText;
+    width: min-content;
+    margin-inline: auto;
+    border-radius: 15px;
 }
 input[type="range"] {
     display: flex;
-    width: 20vh;
+    width: 40vh;
     justify-content: center;
-    align-items: center;
+}
+.pumpSlider{
+    display: flex;
+    justify-content: center;
 }
 
 #temp, #air, #brightness, #moisture, #fan {

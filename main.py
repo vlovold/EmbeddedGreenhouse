@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+
 from data import uart_read, get_data,uart_init
 
 #ser = uart_init()
@@ -21,6 +22,11 @@ def data():
     }
     return parsed_data
 
+@app.route("/set", methods=["POST"])
+def send_actuator():
+    data = request.get_json()
+    value = data["pump"]
+    print("Recieved value:", value)
 
 if __name__ == "__main__":
     app.run(debug=True)
