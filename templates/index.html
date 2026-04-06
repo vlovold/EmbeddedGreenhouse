@@ -57,7 +57,7 @@
 
   <script>
     async function sendValue(value) {
-      await fetch('/set', {
+      fetch('/set', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ pump : value })

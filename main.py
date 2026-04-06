@@ -27,6 +27,7 @@ def send_actuator():
     data = request.get_json()
     value = data["pump"]
     print("Recieved value:", value)
+    return {"status": "ok"}
 
 if __name__ == "__main__":
     app.run(debug=True)
