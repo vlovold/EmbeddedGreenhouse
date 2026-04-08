@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-
+from picamera2 import Picamera2
 from data import uart_read, get_data,uart_init
 
 #ser = uart_init()
@@ -50,6 +50,23 @@ def set_mode():
     print("Mode changed to:", mode)
 
     return {"status": "ok"}
+
+picam2 = Picamera2()
+picam2.configure(picam2.create_video_configuration())
+picam2.start()
+def generate_frames():
+    while True:
+        frame = picam2.capture_array()
+
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame = buffer.tobytes()
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+@app.route("/cam")
+def video():
+    return Response(generate_frames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     app.run(debug=True)
