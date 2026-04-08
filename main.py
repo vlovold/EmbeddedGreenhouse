@@ -56,6 +56,10 @@ picam2 = Picamera2()
 camera_config = picam2.create_preview_configuration()
 picam2.configure(camera_config)
 picam2.start()
+picam2.set_controls({
+    "AeEnable": True,   # Auto exposure
+    "AwbEnable": True   # Auto white balance
+})
 def generate_frames():
     while True:
         frame = picam2.capture_array()
