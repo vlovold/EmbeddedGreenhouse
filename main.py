@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from picamera2 import Picamera2
+import cv2
 from data import uart_read, get_data,uart_init
 
 #ser = uart_init()
