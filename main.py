@@ -54,11 +54,18 @@ def set_mode():
 
 picam2 = Picamera2()
 camera_config = picam2.create_preview_configuration()
+camera_config = picam2.create_video_configuration(
+    main={"size": (1280, 720), "format": "RGB888"},
+    controls={"FrameRate": 30}
+)
 picam2.configure(camera_config)
 picam2.start()
 picam2.set_controls({
-    "AeEnable": True,   # Auto exposure
-    "AwbEnable": True   # Auto white balance
+    "AeEnable": True,
+    "AwbEnable": True,
+    "Brightness": 0.0,
+    "Contrast": 1.1,
+    "Saturation": 1.1
 })
 def generate_frames():
     while True:
