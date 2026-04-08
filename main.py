@@ -53,7 +53,7 @@ def set_mode():
     return {"status": "ok"}
 
 picam2 = Picamera2()
-camera_config = picam2.create_preview_configuration()
+#camera_config = picam2.create_preview_configuration()
 camera_config = picam2.create_video_configuration(
     main={"size": (1280, 720), "format": "RGB888"},
     controls={"FrameRate": 30}
