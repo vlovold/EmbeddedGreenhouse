@@ -54,7 +54,7 @@ def set_mode():
 
 picam2 = Picamera2()
 camera_config = picam2.create_preview_configuration(
-    main={"size": (1280, 720), "format": "RGB888"}
+    main={"format": "RGB888"}
 )
 picam2.configure(camera_config)
 picam2.start()
