@@ -53,7 +53,8 @@ def set_mode():
     return {"status": "ok"}
 
 picam2 = Picamera2()
-picam2.configure(picam2.create_video_configuration())
+camera_config = picam2.create_preview_configuration()
+picam2.configure(camera_config)
 picam2.start()
 def generate_frames():
     while True:
@@ -70,4 +71,4 @@ def video():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
