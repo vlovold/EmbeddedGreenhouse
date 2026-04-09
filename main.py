@@ -38,7 +38,7 @@ def send_actuator():
         actuators["fan"] = data["fan"]
     if "led" in data:
         actuators["led"] = data["led"]
-    print("LED:" + actuators["led"])
+    print("LED:" + str(actuators["led"]))
 #    ser.write("LED:" + actuators["led"])
     return {"status": "ok"}
 
