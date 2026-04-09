@@ -3,7 +3,7 @@ from picamera2 import Picamera2
 import cv2
 from data import uart_read, get_data,uart_init
 
-#ser = uart_init()
+ser = uart_init()
 app = Flask(__name__)
 #app.run(host="0.0.0.0", port=5000)
 actuators = {"pump": 0, "fan": 0, "led": 0}
@@ -14,15 +14,15 @@ def index():
 
 @app.route("/data")
 def data():
-#    msg = uart_read(ser)
-#    parsed_data = get_data(msg)
-    parsed_data = {
-        "TEMP": 20,
-        "HUM": 30,
-        "BRIGHT": 600,
-        "SOIL": 40,
-        "FAN": 800
-    }
+    msg = uart_read(ser)
+    parsed_data = get_data(msg)
+#    parsed_data = {
+#        "TEMP": 20,
+#        "HUM": 30,
+#        "BRIGHT": 600,
+#        "SOIL": 40,
+#        "FAN": 800
+#    }
     return parsed_data
 
 @app.route("/set", methods=["POST"])
@@ -38,8 +38,9 @@ def send_actuator():
         actuators["fan"] = data["fan"]
     if "led" in data:
         actuators["led"] = data["led"]
-    print("LED:" + str(actuators["led"]))
-#    ser.write("LED:" + actuators["led"])
+#    print("LED:" + str(actuators["led"]))
+    msg = ("LED:" + str(actuators["led"]))
+    ser.write(msg.encode('utf-8'))
     return {"status": "ok"}
 
 @app.route("/mode", methods=["POST"])
