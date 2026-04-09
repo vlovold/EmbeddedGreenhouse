@@ -44,7 +44,7 @@ def send_actuator():
     if "led" in data:
         actuators["led"] = data["led"]
 #    print("LED:" + str(actuators["led"]))
-    msg = ("LED:" + str(actuators["led"]))
+    msg = ("LED:" + str(actuators["led"]) + "\r\n")
     ser.write(msg.encode('utf-8'))
     print(msg)
     return {"status": "ok"}
