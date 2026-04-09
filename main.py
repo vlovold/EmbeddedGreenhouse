@@ -7,6 +7,7 @@ ser = uart_init()
 app = Flask(__name__)
 #app.run(host="0.0.0.0", port=5000)
 actuators = {"pump": 0, "fan": 0, "led": 0}
+sensors = {"TEMP": 0, "BRIGHT": 0, "FAN": 0, "HUM": 0, "FAN": 0, "SOIL": 0}
 mode = "MANUAL"
 @app.route("/")
 def index():
@@ -14,8 +15,12 @@ def index():
 
 @app.route("/data")
 def data():
+    global sensors
     msg = uart_read(ser)
     parsed_data = get_data(msg)
+    for key in parsed_data:
+        if sensors[key] == parsed_data[key]:
+            sensors[key] = parsed_data[key]
 #    parsed_data = {
 #        "TEMP": 20,
 #        "HUM": 30,
@@ -23,7 +28,7 @@ def data():
 #        "SOIL": 40,
 #        "FAN": 800
 #    }
-    return parsed_data
+    return sensors
 
 @app.route("/set", methods=["POST"])
 def send_actuator():
