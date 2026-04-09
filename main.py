@@ -38,7 +38,8 @@ def send_actuator():
         actuators["fan"] = data["fan"]
     if "led" in data:
         actuators["led"] = data["led"]
-    print("LED:", actuators["led"], "PUMP:", actuators["pump"], "FAN:", actuators["fan"])
+    print("LED:" + actuators["led"])
+#    ser.write("LED:" + actuators["led"])
     return {"status": "ok"}
 
 @app.route("/mode", methods=["POST"])
