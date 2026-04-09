@@ -7,7 +7,7 @@ ser = uart_init()
 app = Flask(__name__)
 #app.run(host="0.0.0.0", port=5000)
 actuators = {"pump": 0, "fan": 0, "led": 0}
-sensors = {"TEMP": 0, "BRIGHT": 0, "FAN": 0, "HUM": 0, "FAN": 0, "SOIL": 0}
+sensors = {"TEMP": 0, "BRIGHT": 0, "FAN": 0, "HUM": 0, "FAN": 0, "SOIL": 0, "LED": 0}
 mode = "MANUAL"
 @app.route("/")
 def index():
