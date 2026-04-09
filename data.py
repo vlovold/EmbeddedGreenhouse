@@ -11,6 +11,7 @@ def uart_init():
     return ser
 
 def uart_read(ser):
+    decoded_data = None
     if ser.inWaiting() > 0:
         data = ser.readline()
         decoded_data = data.decode('utf-8')

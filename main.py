@@ -20,7 +20,6 @@ def data():
     print(msg)
     parsed_data = get_data(msg)
     for key in parsed_data:
-        if sensors.get(key) != parsed_data.get(key):
             sensors[key] = parsed_data[key]
 #    parsed_data = {
 #        "TEMP": 20,
