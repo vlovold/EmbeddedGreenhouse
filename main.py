@@ -17,6 +17,7 @@ def index():
 def data():
     global sensors
     msg = uart_read(ser)
+    print(msg)
     parsed_data = get_data(msg)
     for key in parsed_data:
         if sensors.get(key) != parsed_data[key]:
