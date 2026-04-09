@@ -19,6 +19,8 @@ def uart_read(ser):
 
 def get_data(msg):
     result = {}
+    if not msg:
+        return {}
     parts = msg.strip().split('-')
 
     for part in parts:
