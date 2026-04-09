@@ -41,6 +41,7 @@ def send_actuator():
 #    print("LED:" + str(actuators["led"]))
     msg = ("LED:" + str(actuators["led"]))
     ser.write(msg.encode('utf-8'))
+    print(msg)
     return {"status": "ok"}
 
 @app.route("/mode", methods=["POST"])
