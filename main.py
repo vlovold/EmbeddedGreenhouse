@@ -17,7 +17,7 @@ def index():
 @app.route("/data")
 def data():
     global sensors
-    msg = uart_read(ser) + uart_read(ser_usb)
+    msg = str(uart_read(ser)) + str(uart_read(ser_usb))
     print(msg)
     parsed_data = get_data(msg)
     for key in parsed_data:
