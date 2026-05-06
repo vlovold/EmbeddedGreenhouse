@@ -10,6 +10,16 @@ def uart_init():
     time.sleep(0.1)
     return ser
 
+def uart_USB_init():
+    ser_usb = serial.Serial(port='/dev/ttyUSB0',
+                        baudrate=9600,
+                        timeout=2,
+                        parity=serial.PARITY_NONE,
+                        stopbits=serial.STOPBITS_ONE,
+                        bytesize=serial.EIGHTBITS)
+    time.sleep(0.1)
+    return ser_usb
+
 def uart_read(ser):
     decoded_data = None
     if ser.inWaiting() > 0:

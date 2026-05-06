@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, Response
 from picamera2 import Picamera2
 import cv2
-from data import uart_read, get_data,uart_init
+from data import uart_read, get_data,uart_init, uart_USB_init
 
 ser = uart_init()
+ser_usb = uart_USB_init()
 app = Flask(__name__)
 #app.run(host="0.0.0.0", port=5000)
 actuators = {"pump": 0, "fan": 0, "led": 0}
@@ -16,7 +17,7 @@ def index():
 @app.route("/data")
 def data():
     global sensors
-    msg = uart_read(ser)
+    msg = uart_read(ser) + uart_read(ser_usb)
     print(msg)
     parsed_data = get_data(msg)
     for key in parsed_data:
