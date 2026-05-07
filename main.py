@@ -22,14 +22,9 @@ def data():
     parsed_data = get_data(msg)
     for key in parsed_data:
             sensors[key] = parsed_data[key]
-    parsed_data['SOIL'] = ((parsed_data['SOIL'] / 4048) * 100)
-#    parsed_data = {
-#        "TEMP": 20,
-#        "HUM": 30,
-#        "BRIGHT": 600,
-#        "SOIL": 40,
-#        "FAN": 800
-#    }
+    if 'SOIL' in parsed_data:
+        parsed_data['SOIL'] = (parsed_data['SOIL'] / 4048) * 100
+
     return sensors
 
 @app.route("/set", methods=["POST"])
