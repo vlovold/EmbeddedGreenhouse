@@ -6,15 +6,12 @@ from data import uart_read, get_data,uart_init, uart_USB_init
 ser = uart_init()
 ser_usb = uart_USB_init()
 app = Flask(__name__)
-#app.run(host="0.0.0.0", port=5000)
 actuators = {"pump": 0, "fan": 0, "led": 0}
 sensors = {"TEMP": 0, "BRIGHT": 0, "HUM": 0, "FAN": 0, "SOIL": 0, "LED": 0}
 mode = "MANUAL"
 @app.route("/")
 def index():
     return render_template("index.html")
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
 
 @app.route("/data")
 def data():
@@ -111,4 +108,4 @@ def video():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=True)
