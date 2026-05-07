@@ -38,16 +38,21 @@ def send_actuator():
     if mode == "AUTO":
         return {"status": "ignored (AUTO mode)"}
     data = request.get_json()
+
     if "pump" in data:
         actuators["pump"] = data["pump"]
     if "fan" in data:
         actuators["fan"] = data["fan"]
     if "led" in data:
         actuators["led"] = data["led"]
+    fan = int(actuators["fan"])
+    pump = int(actuators["pump"])
 #    print("LED:" + str(actuators["led"]))
     msg = ("LED:" + str(actuators["led"]) + "\r\n")
-    msg_usb = ("FAN:" + str(int((actuators["fan"]) / 1600) * 255) + "-PUMP:"
-               + str(int((actuators["pump"]) / 100) * 255) + "\r\n")
+    msg_usb = (
+        f"FAN:{int((fan / 1600) * 255)}"
+        f"-PUMP:{int((pump / 100) * 255)}\r\n"
+    )
     ser.write(msg.encode('utf-8'))
     ser_usb.write(msg_usb.encode('utf-8'))
     print(msg)
