@@ -46,13 +46,14 @@ def send_actuator():
         actuators["led"] = data["led"]
 #    print("LED:" + str(actuators["led"]))
     msg = ("LED:" + str(actuators["led"]) + "\r\n")
-    msg_usb = ("FAN:" + str(actuators["fan"]) + "-PUMP:" + str(actuators["pump"]) + "\r\n")
+    msg_usb = ("FAN:" + str(int((actuators["fan"]) / 1600) * 255) + "-PUMP:"
+               + str(int((actuators["pump"]) / 100) * 255) + "\r\n")
     ser.write(msg.encode('utf-8'))
     ser_usb.write(msg_usb.encode('utf-8'))
     print(msg)
     print(msg_usb)
     return {"status": "ok"}
-
+int((x / 1600) * 255)
 @app.route("/mode", methods=["POST"])
 def set_mode():
     global mode
