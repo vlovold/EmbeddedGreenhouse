@@ -17,16 +17,29 @@ def index():
 @app.route("/data")
 def data():
     global sensors
-    msg = uart_read(ser_usb)
-    print(msg)
-    parsed_data = get_data(msg)
 
+    # Read from USB UART
+    msg_usb = uart_read(ser_usb)
+    print("USB:", msg_usb)
+
+    # Read from GPIO UART
+    msg_gpio = uart_read(ser)
+    print("GPIO:", msg_gpio)
+
+    # Parse both messages
+    parsed_usb = get_data(msg_usb)
+    parsed_gpio = get_data(msg_gpio)
+
+    # Merge dictionaries
+    parsed_data = {**parsed_usb, **parsed_gpio}
+
+    # Soil conversion
     if "SOIL" in parsed_data:
-        parsed_data["SOIL"] = int((parsed_data['SOIL'] / 4048) * 100)
+        parsed_data["SOIL"] = int((parsed_data["SOIL"] / 4048) * 100)
 
+    # Update sensors
     for key in parsed_data:
-            sensors[key] = parsed_data[key]
-
+        sensors[key] = parsed_data[key]
 
     return sensors
 
