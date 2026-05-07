@@ -20,10 +20,13 @@ def data():
     msg = uart_read(ser_usb)
     print(msg)
     parsed_data = get_data(msg)
+
+    if "SOIL" in parsed_data:
+        parsed_data["SOIL"] = (parsed_data['SOIL'] / 4048) * 100
+
     for key in parsed_data:
             sensors[key] = parsed_data[key]
-    if 'SOIL' in parsed_data:
-        parsed_data['SOIL'] = (parsed_data['SOIL'] / 4048) * 100
+
 
     return sensors
 
