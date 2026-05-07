@@ -22,7 +22,7 @@ def data():
     parsed_data = get_data(msg)
 
     if "SOIL" in parsed_data:
-        parsed_data["SOIL"] = int(parsed_data['SOIL'] / 4048) * 100
+        parsed_data["SOIL"] = int((parsed_data['SOIL'] / 4048) * 100)
 
     for key in parsed_data:
             sensors[key] = parsed_data[key]
