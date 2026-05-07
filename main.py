@@ -53,7 +53,6 @@ def send_actuator():
     print(msg)
     print(msg_usb)
     return {"status": "ok"}
-int((x / 1600) * 255)
 @app.route("/mode", methods=["POST"])
 def set_mode():
     global mode
