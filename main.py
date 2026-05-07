@@ -46,7 +46,7 @@ def send_actuator():
         actuators["led"] = data["led"]
 #    print("LED:" + str(actuators["led"]))
     msg = ("LED:" + str(actuators["led"]) + "\r\n")
-    msg_usb = ("FAN:" + str(actuators["fan"]) + "-PUMP:" + str(actuators["pump"]) + "\r\n")
+    msg_usb = ("FAN:" + str(actuators["fan"]) + "-PUMP:" + str(actuators["pump"]) + "\n")
     ser.write(msg.encode('utf-8'))
     ser_usb.write(msg_usb.encode('utf-8'))
     print(msg)
