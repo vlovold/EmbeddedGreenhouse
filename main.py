@@ -22,6 +22,7 @@ def data():
     parsed_data = get_data(msg)
     for key in parsed_data:
             sensors[key] = parsed_data[key]
+    parsed_data['SOIL'] = ((parsed_data['SOIL'] / 4048) * 100)
 #    parsed_data = {
 #        "TEMP": 20,
 #        "HUM": 30,
@@ -50,7 +51,7 @@ def send_actuator():
 #    print("LED:" + str(actuators["led"]))
     msg = ("LED:" + str(actuators["led"]) + "\r\n")
     msg_usb = (
-        f"FAN:{int((fan / 1600) * 255)}"
+        f"FAN:{int((fan / 1400) * 255)}"
         f"-PUMP:{int((pump / 100) * 255)}\r\n"
     )
     ser.write(msg.encode('utf-8'))
