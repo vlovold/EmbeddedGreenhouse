@@ -61,8 +61,8 @@ def send_actuator():
 #    print("LED:" + str(actuators["led"]))
     msg = ("LED:" + str(actuators["led"]) + "\r\n")
     msg_usb = (
-        f"FAN:{int((fan / 1400) * 255)}"
-        f"-PUMP:{int((pump / 100) * 255)}\r\n"
+        f"FAN:{int((fan / 1400) * 256)}"
+        f"-PUMP:{int((pump / 100) * 256)}\r\n"
     )
     ser.write(msg.encode('utf-8'))
     ser_usb.write(msg_usb.encode('utf-8'))
