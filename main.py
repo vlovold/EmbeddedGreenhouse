@@ -34,7 +34,7 @@ def data():
 
     # Soil conversion
     if "SOIL" in parsed_data:
-        parsed_data["SOIL"] = int((parsed_data["SOIL"] / 4048) * 100)
+        parsed_data["SOIL"] = int((parsed_data["SOIL"] / 4095) * 100)
 
     # Update sensors
     for key in parsed_data:
