@@ -7,6 +7,7 @@ from datetime import datetime
 import signal
 import sys
 import subprocess
+import os
 
 ser = uart_init()
 ser_usb = uart_USB_init()
@@ -133,24 +134,42 @@ def video():
     return Response(generate_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
-def git_save():
-    subprocess.run(["git", "add", "data/humidity_log.csv"])
+def git_save(filename):
+    subprocess.run(["git", "add", filename])
     subprocess.run(["git", "commit", "-m", "Update greenhouse log"])
     subprocess.run(["git", "push"])
-def shutdown_handler(sig, frame):
+
+def save_log():
+    global df
+
     print("Saving log...")
+
+    os.makedirs("data", exist_ok=True)
 
     filename = datetime.now().strftime(
         "data/log_%Y%m%d_%H%M%S.csv"
     )
 
     df.to_csv(filename, index=False)
-    git_save()
-    print("CSV saved")
+    print(f"CSV saved as {filename}")
+
+    git_save(filename)
+
+def shutdown_handler(sig, frame):
+    save_log()
     sys.exit(0)
 
-
 signal.signal(signal.SIGINT, shutdown_handler)
+signal.signal(signal.SIGTERM, shutdown_handler)
+
+if __name__ == "__main__":
+    try:
+        app.run(
+            host="0.0.0.0",
+            port=5000,
+            debug=True,
+            use_reloader=False
+        )
+    finally:
+        save_log()
 
