@@ -3,7 +3,7 @@ from picamera2 import Picamera2
 import cv2
 from data import uart_read, get_data,uart_init, uart_USB_init
 import pandas as pd
-import datetime
+from datetime import datetime
 
 ser = uart_init()
 ser_usb = uart_USB_init()
