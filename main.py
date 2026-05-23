@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, Response
 from picamera2 import Picamera2
 import cv2
 from data import uart_read, get_data,uart_init, uart_USB_init
+import pandas as pd
+import datetime
 
 ser = uart_init()
 ser_usb = uart_USB_init()
@@ -9,6 +11,7 @@ app = Flask(__name__)
 actuators = {"pump": 0, "fan": 0, "led": 0}
 sensors = {"TEMP": 0, "BRIGHT": 0, "HUM": 0, "FAN": 0, "SOIL": 0, "LED": 0}
 mode = "MANUAL"
+df = pd.DataFrame(columns=["TIME", "TEMP", "HUM", "FAN", "SOIL"])
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -16,6 +19,7 @@ def index():
 @app.route("/data")
 def data():
     global sensors
+    global df
 
     # Read from USB UART
     msg_usb = uart_read(ser_usb)
@@ -40,12 +44,21 @@ def data():
     for key in parsed_data:
         sensors[key] = parsed_data[key]
 
+    # Lagre ny måling i dataframe
+    new_row = sensors.copy()
+    new_row["TIME"] = datetime.now()
+
+    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+
+    print(df.tail())
+
     return sensors
 
 @app.route("/set", methods=["POST"])
 def send_actuator():
     global actuators
     global mode
+
     if mode == "AUTO":
         return {"status": "ignored (AUTO mode)"}
     data = request.get_json()
