@@ -67,7 +67,7 @@ body {
     justify-content: center;
 }
 
-.pumpDiv, .fanDiv .regHumDiv {
+.pumpDiv, .fanDiv, .regHumDiv {
     display: flex;
     flex-direction: column;
     justify-content: center;
