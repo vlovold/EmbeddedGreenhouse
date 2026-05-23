@@ -67,7 +67,7 @@ body {
     justify-content: center;
 }
 
-.pumpDiv, .fanDiv{
+.pumpDiv, .fanDiv .humRegDiv{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -98,7 +98,7 @@ input[type="range"] {
 input[type="range"]:disabled {
   opacity: 0.5;
 }
-.pumpSlider, .fanSliderDiv, .ledSliderDiv .regHumDiv{
+.pumpSlider, .fanSliderDiv, .ledSliderDiv .regHumSlider{
     display: flex;
     justify-content: center;
 }
