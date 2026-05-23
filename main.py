@@ -16,6 +16,7 @@ app = Flask(__name__)
 actuators = {"pump": 0, "fan": 0, "led": 0}
 sensors = {"TEMP": 0, "BRIGHT": 0, "HUM": 0, "FAN": 0, "SOIL": 0, "LED": 0}
 mode = "MANUAL"
+humidity_ref = 50
 df = pd.DataFrame(columns=[
     "TIME", "TEMP", "HUM", "SOIL", "PUMP", "FAN", "LED"])
 @app.route("/")
@@ -70,7 +71,7 @@ def data():
     print(df.tail())
 
     if mode == "AUTO":
-        fan_value = humidity_controller(sensors["HUM"], 40)
+        fan_value = humidity_controller(sensors["HUM"], humidity_ref)
         actuators["fan"] = fan_value
 
         msg_usb = (
@@ -119,6 +120,18 @@ def set_mode():
     print("Mode changed to:", mode)
 
     return {"status": "ok"}
+
+@app.route("/set_humidity_ref", methods=["POST"])
+def set_humidity_ref():
+    global humidity_ref
+
+    data = request.get_json()
+    humidity_ref = int(data["humidity_ref"])
+
+    print("Humidity reference:", humidity_ref)
+
+    return {"status": "ok", "humidity_ref": humidity_ref}
+
 
 picam2 = Picamera2()
 camera_config = picam2.create_preview_configuration(

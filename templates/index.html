@@ -82,6 +82,23 @@
     </div>
   </div>
 
+<script>
+const regHumSlider = document.getElementById("regHum");
+const humidityDisplay = document.getElementById("humidityValue");
+
+humidityDisplay.innerText = regHumSlider.value;
+
+regHumSlider.oninput = async () => {
+  humidityDisplay.innerText = regHumSlider.value;
+
+  await fetch('/set_humidity_ref', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ humidity_ref: regHumSlider.value })
+  });
+};
+</script>
+
 
 <script>
 function setupSlider(sliderId, displayId, key) {
