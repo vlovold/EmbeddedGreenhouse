@@ -11,7 +11,10 @@ app = Flask(__name__)
 actuators = {"pump": 0, "fan": 0, "led": 0}
 sensors = {"TEMP": 0, "BRIGHT": 0, "HUM": 0, "FAN": 0, "SOIL": 0, "LED": 0}
 mode = "MANUAL"
-df = pd.DataFrame(columns=["TIME", "TEMP", "HUM", "FAN", "SOIL"])
+df = pd.DataFrame(columns=[
+    "TIME", "TEMP", "BRIGHT", "HUM", "FAN_SENSOR", "SOIL", "LED_SENSOR",
+    "PUMP", "FAN", "LED"
+])
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -45,10 +48,22 @@ def data():
         sensors[key] = parsed_data[key]
 
     # Lagre ny måling i dataframe
-    new_row = sensors.copy()
-    new_row["TIME"] = datetime.now()
+    new_row = {
+        "TIME": datetime.now(),
 
-    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+        "TEMP": sensors["TEMP"],
+        "BRIGHT": sensors["BRIGHT"],
+        "HUM": sensors["HUM"],
+        "FAN_SENSOR": sensors["FAN"],
+        "SOIL": sensors["SOIL"],
+        "LED_SENSOR": sensors["LED"],
+
+        "PUMP": actuators["pump"],
+        "FAN": actuators["fan"],
+        "LED": actuators["led"]
+    }
+
+    df.loc[len(df)] = new_row
 
     print(df.tail())
 
