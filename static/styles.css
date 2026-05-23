@@ -98,7 +98,7 @@ input[type="range"] {
 input[type="range"]:disabled {
   opacity: 0.5;
 }
-.pumpSlider, .fanSliderDiv, .ledSliderDiv{
+.pumpSlider, .fanSliderDiv, .ledSliderDiv .regHumDiv{
     display: flex;
     justify-content: center;
 }
