@@ -79,7 +79,6 @@ def data():
 
         ser_usb.write(msg_usb.encode("utf-8"))
         print(fan_value)
-        return {"status": "ignored (AUTO mode)"}
 
     return sensors
 

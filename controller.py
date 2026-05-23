@@ -5,7 +5,7 @@ deadband = 1.0    # %RH
 
 integral = 0.0
 
-fan_min = 0
+fan_min = 250
 fan_max = 1400
 
 def humidity_controller(hum_measured, hum_ref):
