@@ -164,7 +164,6 @@ def save_log():
     df.to_csv(filename, index=False)
     print(f"CSV saved as {filename}")
 
-    git_save(filename)
 
 def shutdown_handler(sig, frame):
     save_log()
