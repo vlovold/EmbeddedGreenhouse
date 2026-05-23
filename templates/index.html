@@ -145,10 +145,9 @@ setupSlider("ledSlider", "ledValue", "led");
      const slider = document.getElementById("fanSlider");
      const slider1 = document.getElementById("ledSlider");
      const slider2 = document.getElementById("pump");
-     const regHumSlider = document.getElementById("regHum");
+     const autoHumSlider = document.getElementById("regHum");
 
-     regHumSlider.disabled = true;
-
+     autoHumSlider.disabled = true;
 
      toggle.onchange = async function() {
         const mode = this.checked ? "AUTO" : "MANUAL";
@@ -163,7 +162,8 @@ setupSlider("ledSlider", "ledValue", "led");
     slider.disabled = (mode === "AUTO");
     slider1.disabled = (mode === "AUTO");
     slider2.disabled = (mode === "AUTO");
-    regHumSlider.disabled = (mode === "MANUAL");
+    autoHumSlider.disabled = (mode === "MANUAL");
+
     }
 </script>
 </body>
