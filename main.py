@@ -26,6 +26,7 @@ def index():
 def data():
     global sensors
     global df
+    global mode
 
     # Read from USB UART
     msg_usb = uart_read(ser_usb)
@@ -67,13 +68,6 @@ def data():
 
     print(df.tail())
 
-    return sensors
-
-@app.route("/set", methods=["POST"])
-def send_actuator():
-    global actuators
-    global mode
-
     if mode == "AUTO":
         fan_value = humidity_controller(sensors["HUM"], 40)
         actuators["fan"] = fan_value
@@ -86,6 +80,14 @@ def send_actuator():
         ser_usb.write(msg_usb.encode("utf-8"))
         print(fan_value)
         return {"status": "ignored (AUTO mode)"}
+
+    return sensors
+
+@app.route("/set", methods=["POST"])
+def send_actuator():
+    global actuators
+    global mode
+
     data = request.get_json()
 
     if "pump" in data:
