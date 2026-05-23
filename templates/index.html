@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="with=device_width, initial-scale=1.0">
-  <title>Greenhouse</title>
-  <link rel="stylesheet" href="static/styles.css">
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="with=device_width, initial-scale=1.0">
+    <title>Greenhouse</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <style>
     @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-  </style>
+
+    </style>
 </head>
 
 <body>
-  <div class="title">
+<div class="title">
     <h1>Online Greenhouse</h1>
-  </div>
+</div>
 <hr>
-  <div class="subtitle-cont">
+<div class="subtitle-cont">
     <div class="sensor">
-      <h2>Live Sensor Data</h2>
-      <div class="data_display">
-        <p>Temperature: <span id="temp" ></span>°C</p>
-        <p>Soil Humidity: <span id="moisture"></span>%</p>
-        <p>Air  Humidity: <span id="air"></span>%</p>
-        <p>Brightness: <span id="brightness"></span></p>
+        <h2>Live Sensor Data</h2>
+        <div class="data_display">
+            <p>Temperature: <span id="temp"></span>°C</p>
+            <p>Soil Humidity: <span id="moisture"></span>%</p>
+            <p>Air Humidity: <span id="air"></span>%</p>
+            <p>Brightness: <span id="brightness"></span></p>
 
-      </div>
-      <h3>Livestream from Greenhouse</h3>
-      <img class="gif" src="/cam" width="500">
+        </div>
+        <h3>Livestream from Greenhouse</h3>
+        <img class="gif" src="/cam" width="500">
     </div>
     <div class="control">
-      <h2>Manual Control</h2>
+        <h2>Manual Control</h2>
 
-      <div class="control_display">
-        <div class="firstLine">
-          <div class="pumpDiv">
-            <h3>Water Pump:</h3>
-            <div class="pumpSlider">
-             <input type="range" id="pump" min="0" max="100" value="0">
+        <div class="control_display">
+            <div class="firstLine">
+                <div class="pumpDiv">
+                    <h3>Water Pump:</h3>
+                    <div class="pumpSlider">
+                        <input type="range" id="pump" min="0" max="100" value="0">
+                    </div>
+                    <p>Pump speed: <span id="pumpValue">0</span>%</p>
+                </div>
+                <div class="fanDiv">
+                    <h3>Fan Speed:</h3>
+                    <div class="fanSliderDiv">
+                        <input type="range" id="fanSlider" min="0" max="1400" value="0">
+                    </div>
+                    <p>Fan Speed: <span id="fanValue">0</span>RPM</p>
+                </div>
+
             </div>
-          <p>Pump speed: <span id="pumpValue">0</span>%</p>
-          </div>
-          <div class="fanDiv">
-            <h3>Fan Speed:</h3>
-            <div class="fanSliderDiv">
-              <input type="range" id="fanSlider" min="0" max="1400" value="0">
+            <div class="secondLine">
+                <div class="ledDiv">
+                    <h3>LED Brightness:</h3>
+                    <div class="ledSliderDiv">
+                        <input type="range" id="ledSlider" min="0" max="100" value="0">
+                    </div>
+                    <p>LED Brightness: <span id="ledValue">0</span>%</p>
+                </div>
             </div>
-            <p>Fan Speed: <span id="fanValue">0</span>RPM</p>
-          </div>
+        </div>
+        <div class="autoControl">
+            <h2>Automatic Control</h2>
+            <div class="autoControlPanel">
+                Enable Auto-Mode:
+                <label class="autoswitch">
+                    <input type="checkbox" id="manualOverride">
+                    <span class="slider round"></span>
+                </label>
+                <p>Mode: <span id="modeText">MANUAL</span></p>
+                <div class="regHumDiv">
+                    <h3>Air Humidity</h3>
+                    <div class="regHumSlider">
+                        <input type="range" id="regHum" min="0" max="100" value="50">
+                    </div>
+                    <p>Humidity: <span id="humidityValue">0</span>%</p>
+                </div>
+
+            </div>
 
         </div>
-        <div class="secondLine">
-          <div class="ledDiv">
-            <h3>LED Brightness:</h3>
-            <div class="ledSliderDiv">
-              <input type="range" id="ledSlider" min="0" max="100" value="0">
-            </div>
-            <p>LED Brightness: <span id="ledValue">0</span>%</p>
-          </div>
-        </div>
-      </div>
-      <div class="autoControl">
-        <h2>Automatic Control</h2>
-        <div class="autoControlPanel">
-          Enable Auto-Mode:
-          <label class="autoswitch">
-            <input type="checkbox" id="manualOverride">
-            <span class="slider round"></span>
-          </label>
-          <p>Mode: <span id="modeText">MANUAL</span></p>
-          <div class="regHumDiv" >
-            <h3>Air Humidity</h3>
-            <div class="regHumSlider">
-              <input type="range" id="regHum" min="0" max="100" value="50">
-            </div>
-            <p>Humidity: <span id="humidityValue">0</span>%</p>
-          </div>
-
-        </div>
-
-      </div>
     </div>
-  </div>
+</div>
 
 <script>
 const regHumSlider = document.getElementById("regHum");
@@ -97,6 +98,7 @@ regHumSlider.oninput = async () => {
     body: JSON.stringify({ humidity_ref: regHumSlider.value })
   });
 };
+
 </script>
 
 
@@ -118,11 +120,11 @@ function setupSlider(sliderId, displayId, key) {
 setupSlider("pump", "pumpValue", "pump");
 setupSlider("fanSlider", "fanValue", "fan");
 setupSlider("ledSlider", "ledValue", "led");
+
 </script>
 
 
-
-  <script>
+<script>
     async function update() {
     const res = await fetch('/data');
     const data = await res.json();
@@ -135,31 +137,29 @@ setupSlider("ledSlider", "ledValue", "led");
     }
 
     setInterval(update, 1000);
-  </script>
 
-  <script>
-  const toggle = document.getElementById("manualOverride");
-  const slider = document.getElementById("fanSlider");
-  const slider1 = document.getElementById("ledSlider");
-  const slider2 = document.getElementById("pump");
-  const regHumSlider = document.getElementById("regHum");
+</script>
 
-  regHumSlider.disabled = true;
+<script>
+     const toggle = document.getElementById("manualOverride");
+     const slider = document.getElementById("fanSlider");
+     const slider1 = document.getElementById("ledSlider");
+     const slider2 = document.getElementById("pump");
 
-  toggle.onchange = async function() {
-    const mode = this.checked ? "AUTO" : "MANUAL";
+     toggle.onchange = async function() {
+        const mode = this.checked ? "AUTO" : "MANUAL";
 
-    await fetch('/mode', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ mode: mode })
-    });
+     await fetch('/mode', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ mode: mode })
+        });
+
     document.getElementById("modeText").innerText = mode;
     slider.disabled = (mode === "AUTO");
     slider1.disabled = (mode === "AUTO");
     slider2.disabled = (mode === "AUTO");
-    regHumSlider.disabled = (mode === "MANUAL");
-  }
-  </script>
+    }
+</script>
 </body>
 </html>
