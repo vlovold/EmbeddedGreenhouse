@@ -12,9 +12,7 @@ actuators = {"pump": 0, "fan": 0, "led": 0}
 sensors = {"TEMP": 0, "BRIGHT": 0, "HUM": 0, "FAN": 0, "SOIL": 0, "LED": 0}
 mode = "MANUAL"
 df = pd.DataFrame(columns=[
-    "TIME", "TEMP", "BRIGHT", "HUM", "FAN_SENSOR", "SOIL", "LED_SENSOR",
-    "PUMP", "FAN", "LED"
-])
+    "TIME", "TEMP", "HUM", "SOIL", "PUMP", "FAN", "LED"])
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -52,11 +50,8 @@ def data():
         "TIME": datetime.now(),
 
         "TEMP": sensors["TEMP"],
-        "BRIGHT": sensors["BRIGHT"],
         "HUM": sensors["HUM"],
-        "FAN_SENSOR": sensors["FAN"],
         "SOIL": sensors["SOIL"],
-        "LED_SENSOR": sensors["LED"],
 
         "PUMP": actuators["pump"],
         "FAN": actuators["fan"],
