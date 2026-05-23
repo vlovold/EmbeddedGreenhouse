@@ -82,43 +82,43 @@
     </div>
   </div>
 
-<script>
-const regHumSlider = document.getElementById("regHum");
-const humidityDisplay = document.getElementById("humidityValue");
+  <script>
+  const regHumSlider = document.getElementById("regHum");
+  const humidityDisplay = document.getElementById("humidityValue");
 
-humidityDisplay.innerText = regHumSlider.value;
-
-regHumSlider.oninput = async () => {
   humidityDisplay.innerText = regHumSlider.value;
 
-  await fetch('/set_humidity_ref', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ humidity_ref: regHumSlider.value })
-  });
-};
-</script>
+  regHumSlider.oninput = async () => {
+    humidityDisplay.innerText = regHumSlider.value;
 
-
-<script>
-function setupSlider(sliderId, displayId, key) {
-  const slider = document.getElementById(sliderId);
-  const display = document.getElementById(displayId);
-
-  slider.oninput = async () => {
-    await fetch('/set', {
+    await fetch('/set_humidity_ref', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ [key]:slider.value})
+      body: JSON.stringify({ humidity_ref: regHumSlider.value })
     });
-    display.innerText = slider.value;
   };
-}
+  </script>
 
-setupSlider("pump", "pumpValue", "pump");
-setupSlider("fanSlider", "fanValue", "fan");
-setupSlider("ledSlider", "ledValue", "led");
-</script>
+
+  <script>
+  function setupSlider(sliderId, displayId, key) {
+    const slider = document.getElementById(sliderId);
+    const display = document.getElementById(displayId);
+
+    slider.oninput = async () => {
+      await fetch('/set', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ [key]:slider.value})
+      });
+      display.innerText = slider.value;
+    };
+  }
+
+  setupSlider("pump", "pumpValue", "pump");
+  setupSlider("fanSlider", "fanValue", "fan");
+  setupSlider("ledSlider", "ledValue", "led");
+  </script>
 
 
 
@@ -139,11 +139,15 @@ setupSlider("ledSlider", "ledValue", "led");
 
   <script>
   const toggle = document.getElementById("manualOverride");
+
   const slider = document.getElementById("fanSlider");
   const slider1 = document.getElementById("ledSlider");
   const slider2 = document.getElementById("pump");
 
+  const regHumSlider = document.getElementById("regHum");
+
   toggle.onchange = async function() {
+
     const mode = this.checked ? "AUTO" : "MANUAL";
 
     await fetch('/mode', {
@@ -151,10 +155,16 @@ setupSlider("ledSlider", "ledValue", "led");
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ mode: mode })
     });
+
     document.getElementById("modeText").innerText = mode;
+
+    // Disable manual sliders in AUTO
     slider.disabled = (mode === "AUTO");
     slider1.disabled = (mode === "AUTO");
     slider2.disabled = (mode === "AUTO");
+
+    // Disable AUTO humidity slider in MANUAL
+    regHumSlider.disabled = (mode === "MANUAL");
   }
   </script>
 </body>
