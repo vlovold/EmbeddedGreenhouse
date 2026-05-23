@@ -25,6 +25,7 @@ def index():
 @app.route("/data")
 def data():
     global sensors
+    global actuators
     global df
     global mode
 
