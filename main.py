@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response
 from picamera2 import Picamera2
 import cv2
 from data import uart_read, get_data,uart_init, uart_USB_init
+from controller import humidity_controller
 import pandas as pd
 from datetime import datetime
 import signal
@@ -74,6 +75,16 @@ def send_actuator():
     global mode
 
     if mode == "AUTO":
+        fan_value = humidity_controller(sensors["HUM"], 40)
+        actuators["fan"] = fan_value
+
+        msg_usb = (
+            f"FAN:{int((fan_value / 1400) * 255)}"
+            f"-PUMP:{int((actuators['pump'] / 100) * 255)}\r\n"
+        )
+
+        ser_usb.write(msg_usb.encode("utf-8"))
+        print(fan_value)
         return {"status": "ignored (AUTO mode)"}
     data = request.get_json()
 
