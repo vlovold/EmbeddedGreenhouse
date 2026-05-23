@@ -4,6 +4,9 @@ import cv2
 from data import uart_read, get_data,uart_init, uart_USB_init
 import pandas as pd
 from datetime import datetime
+import signal
+import sys
+import subprocess
 
 ser = uart_init()
 ser_usb = uart_USB_init()
@@ -132,3 +135,22 @@ def video():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
+def git_save():
+    subprocess.run(["git", "add", "data/humidity_log.csv"])
+    subprocess.run(["git", "commit", "-m", "Update greenhouse log"])
+    subprocess.run(["git", "push"])
+def shutdown_handler(sig, frame):
+    print("Saving log...")
+
+    filename = datetime.now().strftime(
+        "data/log_%Y%m%d_%H%M%S.csv"
+    )
+
+    df.to_csv(filename, index=False)
+    git_save()
+    print("CSV saved")
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, shutdown_handler)
+
