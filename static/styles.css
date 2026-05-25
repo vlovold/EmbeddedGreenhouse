@@ -122,10 +122,12 @@ input[type="range"]:disabled {
     background-color: #063735;
     border-radius: 10px;
     width: 100vh;
+    justify-content: center;
 }
 .autoSecondLine{
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 /* The switch - the box around the slider */
