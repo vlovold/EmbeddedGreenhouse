@@ -23,7 +23,6 @@
             <p>Temperature: <span id="temp"></span>°C</p>
             <p>Soil Humidity: <span id="moisture"></span>%</p>
             <p>Air Humidity: <span id="air"></span>%</p>
-
         </div>
         <h3>Livestream from Greenhouse</h3>
         <img class="gif" src="/cam" width="500">
@@ -130,7 +129,6 @@ setupSlider("ledSlider", "ledValue", "led");
 
     document.getElementById("temp").innerText = data.TEMP;
     document.getElementById("air").innerText = data.HUM;
-    document.getElementById("brightness").innerText = data.BRIGHT;
     document.getElementById("moisture").innerText = data.SOIL;
     document.getElementById("fan").innerText = data.FAN;
     }
