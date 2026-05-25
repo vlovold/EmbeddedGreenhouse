@@ -118,10 +118,14 @@ input[type="range"]:disabled {
 
 .autoControlPanel{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #063735;
     border-radius: 10px;
     width: 100vh;
+}
+.autoSecondLine{
+    display: flex;
+    flex-direction: row;
 }
 
 /* The switch - the box around the slider */

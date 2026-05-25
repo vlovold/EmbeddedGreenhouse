@@ -67,25 +67,28 @@
                     <span class="slider round"></span>
                 </label>
                 <p>Mode: <span id="modeText">MANUAL</span></p>
-                <div class="regHumDiv">
-                    <h3>Air Humidity</h3>
-                    <div class="regHumSlider">
-                        <input type="range" id="regHum" min="0" max="100" value="50">
+                <div class="autoSecondLine">
+                    <div class="regHumDiv">
+                        <h3>Air Humidity</h3>
+                        <div class="regHumSlider">
+                            <input type="range" id="regHum" min="0" max="100" value="50">
+                        </div>
+                        <p>Humidity: <span id="humidityValue">0</span>%</p>
                     </div>
-                    <p>Humidity: <span id="humidityValue">0</span>%</p>
+                    <div class="autoLed">
+                        <h3>Light Schedule</h3>
+                        <div class="ledSchedule">
+                            <h4>Start time:</h4>
+                            <input type="datetime-local" id="ledScheduleInput">
+                        </div>
+                        <div class="ledDuration">
+                            <h4>Duration</h4>
+                            <input type="number" id="ledDurationInput"> Hours
+                        </div>
+                        <input type="submit" id="submit">
+                    </div>
                 </div>
-                <div class="autoLed">
-                    <h3>Light Schedule</h3>
-                    <div class="ledSchedule">
-                        <h4>Start time:</h4>
-                        <input type="datetime-local" id="ledScheduleInput">
-                    </div>
-                    <div class="ledDuration">
-                        <h4>Duration</h4>
-                        <input type="number" id="ledDurationInput"> Hours
-                    </div>
-                    <input type="submit" id="submit">
-                </div>
+
 
             </div>
 
