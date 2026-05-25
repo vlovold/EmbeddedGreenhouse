@@ -132,7 +132,6 @@ input[type="range"]:disabled {
 
 /* The switch - the box around the slider */
 .autoswitch {
-  position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
