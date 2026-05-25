@@ -115,8 +115,10 @@ input[type="range"]:disabled {
 #temp, #air, #brightness, #moisture, #fan {
     font-weight: bold;
 }
+
 .autoControlPanel{
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     background-color: #063735;
     border-radius: 10px;
     width: 100vh;
