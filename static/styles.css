@@ -116,7 +116,7 @@ input[type="range"]:disabled {
     font-weight: bold;
 }
 .autoControlPanel{
-    flex-direction: row;
+    flex-direction: column;
     background-color: #063735;
     border-radius: 10px;
     width: 100vh;
