@@ -67,7 +67,7 @@ body {
     justify-content: center;
 }
 
-.pumpDiv, .fanDiv, .regHumDiv, .autoLed{
+.pumpDiv, .fanDiv, .regHumDiv, .autoLed, .waterFreq{
     display: flex;
     flex-direction: column;
     justify-content: center;

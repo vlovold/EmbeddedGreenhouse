@@ -87,6 +87,13 @@
                         </div>
                         <input type="submit" id="submit">
                     </div>
+                    <div class="waterFreq">
+                        <h3>Irrigation frequency</h3>
+                        <div class="waterFreqSliderDiv">
+                            <input type="range" id="waterFreqInput" min="0" max="10" value="0">
+                        </div>
+                        <p>Watering per day: <span id="waterFreqSpan"></span></p>
+                    </div>
                 </div>
 
 
@@ -133,6 +140,7 @@ function setupSlider(sliderId, displayId, key) {
 setupSlider("pump", "pumpValue", "pump");
 setupSlider("fanSlider", "fanValue", "fan");
 setupSlider("ledSlider", "ledValue", "led");
+setupSlider("waterFreqInput", "waterFreqSpan", "waterFreq");
 
 </script>
 
@@ -158,8 +166,10 @@ setupSlider("ledSlider", "ledValue", "led");
      const slider1 = document.getElementById("ledSlider");
      const slider2 = document.getElementById("pump");
      const autoHumSlider = document.getElementById("regHum");
+     const autoWatering = document.getElementById("waterFreqInput")
 
      autoHumSlider.disabled = true;
+     autoWatering.disabled = true;
 
      toggle.onchange = async function() {
         const mode = this.checked ? "AUTO" : "MANUAL";
@@ -175,6 +185,7 @@ setupSlider("ledSlider", "ledValue", "led");
     slider1.disabled = (mode === "AUTO");
     slider2.disabled = (mode === "AUTO");
     autoHumSlider.disabled = (mode === "MANUAL");
+    autoWatering.disabled = (mode === "MANUAL");
 
     }
 </script>
